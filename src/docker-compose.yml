@@ -1,0 +1,51 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql_server_2025
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=gatech@123!
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./db-init:/usr/config
+    networks:
+      - northwind_network
+    entrypoint: >
+      /bin/bash -c "
+      /opt/mssql/bin/sqlservr & 
+      sleep 30s && 
+      /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'gatech@123!' -C -i /usr/config/Northwind.sql && 
+      wait"
+
+  api:
+    build:
+      context: .
+      dockerfile: Northwind.Customers.Web.Api/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Northwind=Server=sql_server_2025;Database=Northwind;User Id=sa;Password=gatech@123!;TrustServerCertificate=True
+    networks:
+      - northwind_network
+    depends_on:
+      - db
+
+  web:
+    build:
+      context: .
+      dockerfile: Northwind.Customers.Web/Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - CustomersApiOptions__BaseAddress=http://api:8080/
+    networks:
+      - northwind_network
+    depends_on:
+      - api
+
+networks:
+  northwind_network:
+    driver: bridge

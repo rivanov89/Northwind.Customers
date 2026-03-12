@@ -17,7 +17,8 @@ public class CustomerHttpProxy : ICustomerProxy
 
     public Task<CustomerPaginatedResponse> GetCustomersAsync(string? name, int pageIdx, int pageSize, CancellationToken token)
     {
-        var queryString = new StringBuilder($"{Format(_options.Value.GetCustomersTemplate, [new KeyValuePair<string, string>("{version}", _options.Value.ApiVersion.ToString())])}?");
+        var queryString = new StringBuilder($"{Format(_options.Value.GetCustomersTemplate, 
+            [new KeyValuePair<string, string>("{version}", _options.Value.ApiVersion.ToString())])}?");
         if (!string.IsNullOrEmpty(name))
         {
             queryString.Append($"name={name}&");
@@ -37,7 +38,8 @@ public class CustomerHttpProxy : ICustomerProxy
 
     public Task<CustomerOrdersPaginatedResponse> GetCustomerOrdersAsync(string customerId, int pageIdx, int pageSize, CancellationToken token)
     {
-        var queryString = new StringBuilder($"{Format(_options.Value.GetCustomerOrdersTemplate, [new KeyValuePair<string, string>("{version}", _options.Value.ApiVersion.ToString()), new KeyValuePair<string, string>("{customerId}", customerId)])}?");
+        var queryString = new StringBuilder($"{Format(_options.Value.GetCustomerOrdersTemplate,
+            [new KeyValuePair<string, string>("{version}", _options.Value.ApiVersion.ToString()), new KeyValuePair<string, string>("{customerId}", customerId)])}?");
         queryString.Append($"pageIdx={pageIdx-1}&");
         queryString.Append($"pageSize={pageSize}");
 
