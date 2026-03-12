@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="Northwind.Customers.Data.EntityFrameworkCore/Northwind.Customers.Data.EntityFrameworkCore.csproj" Id="f860fb93-5154-4efb-a29a-baba8b8119f8" />
+    <Project Path="Northwind.Customers.Data/Northwind.Customers.Data.csproj" />
+    <Project Path="Northwind.Customers.Domain.Services/Northwind.Customers.Domain.Services.csproj" Id="9a628115-9263-45ac-a092-2c87aac5a1ac" />
+    <Project Path="Northwind.Customers.Infrastructure/Northwind.Customers.Infrastructure.csproj" Id="f193ce3e-8750-4ada-922d-785c4f8ed50f" />
+    <Project Path="Northwind.Customers.Web.Api/Northwind.Customers.Web.Api.csproj" />
+    <Project Path="Northwind.Customers.Web/Northwind.Customers.Web.csproj" Id="3d2c0f81-6296-4235-b3b9-6e43efa97235" />
+  </Folder>
+</Solution>

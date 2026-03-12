@@ -1,0 +1,116 @@
+
+@model Northwind.Customers.Web.Models.CustomerViewModel
+
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+@section Scripts {
+    <script src="~/js/orders.js" asp-append-version="true"></script>
+}
+
+<div class="mb-4">
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-arrow-left"></i> Back to Customers
+    </a>
+</div>
+
+<div class="mb-4">
+    <h1 class="display-6 fw-bold mb-0 text-navy">@Model.CompanyName</h1>
+    <span class="badge bg-secondary">ID: @Model.CustomerId</span>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0 bg-light">
+            <div class="card-body">
+                <h6 class="text-uppercase text-muted small fw-bold mb-3">Contact Details</h6>
+                <div class="mb-2"><strong>@Model.ContactName</strong></div>
+                <div class="text-muted mb-3">@Model.ContactTitle</div>
+
+                <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-telephone me-2 text-primary"></i>
+                    <span class="text-muted me-2">Phone:</span> @Model.Phone
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-printer me-2 text-primary"></i>
+                    <span class="text-muted me-2">Fax:</span> @(string.IsNullOrEmpty(Model.Fax) ? "—" : Model.Fax)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0 bg-light">
+            <div class="card-body">
+                <h6 class="text-uppercase text-muted small fw-bold mb-3">Shipping Location</h6>
+                <address class="mb-0">
+                    <span class="d-block fw-bold">@Model.Address</span>
+                    <span>@Model.City, @(Model.Region ?? "") @Model.PostalCode</span><br />
+                    <span class="text-navy fw-bold text-uppercase">@Model.Country</span>
+                </address>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold"><i class="bi bi-list-ul me-2"></i>Order History</h5>
+
+        <div class="d-flex align-items-center gap-2">
+            <label class="small text-muted mb-0">Show:</label>
+            <select id="order-page-size" class="form-select form-select-sm" style="width: auto;">
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                    <tr>
+                        <th class="ps-4">Total Amount</th>
+                        <th>Products Count</th>
+                        <th class="text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="orders-table-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer bg-white py-3">
+        <nav>
+            <ul class="pagination justify-content-center mb-0"
+                id="pagination-controls"
+                data-customerid="@Model.CustomerId">
+            </ul>
+        </nav>
+    </div>
+</div>
+<style>
+    .text-navy {
+        color: #001f3f;
+    }
+
+    .bg-navy-soft {
+        background-color: #e6e9ed;
+    }
+
+    .fw-600 {
+        font-weight: 600;
+    }
+
+    .stat-card {
+        transition: transform 0.2s;
+        border-left: 4px solid #001f3f !important;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+</style>

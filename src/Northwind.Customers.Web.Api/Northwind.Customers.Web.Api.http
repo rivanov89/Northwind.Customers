@@ -1,0 +1,6 @@
+@Northwind.Customers.Web.Api_HostAddress = http://localhost:5249
+
+GET {{Northwind.Customers.Web.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

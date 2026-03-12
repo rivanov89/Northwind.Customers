@@ -1,0 +1,23 @@
+/* Layout-scoped styles */
+
+a.navbar-brand {
+    white-space: nowrap;
+    word-break: normal;
+}
+
+/* Utility used in views */
+.text-navy {
+    color: #1e3a5f !important;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+/* Override Bootstrap border-top/bottom from legacy styles */
+.border-top { border-top: 1px solid #e2e8f0 !important; }
+.border-bottom { border-bottom: 1px solid #e2e8f0 !important; }
+
+/* Links */
+a { color: #2563eb; }
+a:hover { color: #1d4ed8; }

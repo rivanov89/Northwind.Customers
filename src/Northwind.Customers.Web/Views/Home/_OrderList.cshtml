@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Northwind.Customers.Web.Models.OrderViewModel>
+
+@if (!Model.Any())
+{
+	<tr>
+		<td colspan="5" class="text-center py-4 text-muted">No orders found.</td>
+	</tr>
+}
+else
+{
+	foreach (var order in Model)
+	{
+		<tr>
+			<td class="ps-4">@order.Total.ToString("C2")</td>
+			<td>@order.ProductCount</td>
+			<td class="text-center">
+				@if (order.InStockIssue || order.AnyProductDiscontinued)
+				{
+					<span class="badge bg-warning text-dark" title="There is an issue with completing the order">
+						<i class="bi bi-exclamation-triangle-fill"></i> Issue
+					</span>
+				}
+				else
+				{
+					<span class="badge bg-success-soft text-success">
+						<i class="bi bi-check-circle-fill"></i> OK
+					</span>
+				}
+			</td>
+		</tr>
+	}
+}
