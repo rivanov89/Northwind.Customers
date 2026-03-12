@@ -26,6 +26,7 @@ services:
       - "5000:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - CustomersPagedQueryValidationOptions__MaxPageSize=25
       - ConnectionStrings__Northwind=Server=sql_server_2025;Database=Northwind;User Id=sa;Password=gatech@123!;TrustServerCertificate=True
     networks:
       - northwind_network
